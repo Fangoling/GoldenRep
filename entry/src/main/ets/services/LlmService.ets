@@ -7,7 +7,7 @@ export class LlmService {
   // OpenAI API endpoint
   private readonly API_URL = 'https://api.openai.com/v1/chat/completions';
 
-  private readonly API_KEY = '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';
+  private readonly API_KEY = '';
 
   /**
    * Sends workout data to ChatGPT for analysis.
