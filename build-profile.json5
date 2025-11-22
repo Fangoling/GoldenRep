@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/jennifer/.ohos/config/default_DriveGuard_ess32RgX_nweB-RCCX5Qk4hqFHhWIaKQDBnxrBg1X-k=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B3F3679C47F2AA2727DB4DC323094B724D6ECF7CB09F0F4EE54699AB3FE384E645E133E5D4084A8",
+          "profile": "/Users/jennifer/.ohos/config/default_DriveGuard_ess32RgX_nweB-RCCX5Qk4hqFHhWIaKQDBnxrBg1X-k=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/jennifer/.ohos/config/default_DriveGuard_ess32RgX_nweB-RCCX5Qk4hqFHhWIaKQDBnxrBg1X-k=.p12",
+          "storePassword": "0000001BE12EEAB3D8EA74E58083CB53E2B937628A552DF00F91DDD001DF2CFD97713BFA8CEAC30DA54396"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
