@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "GoldenRep"
+    },
+    {
+      "name": "permission_reason_sensor",
+      "value": "label"
     }
   ]
 }
