@@ -11,7 +11,7 @@ class WorkoutDelegate implements IRecorderUI {
   }
   onDataUpdate(duration: string, count: number) {
   }
-  onRepetitionComplete(data: SensorFrame[]) {
+  onRepetitionComplete() {
     // Rep finished!
     this.owner.repCount++;
   }

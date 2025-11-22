@@ -14,8 +14,8 @@ class BaselineDelegate implements IRecorderUI {
   onDataUpdate(duration: string, count: number) {
     this.owner.durationText = duration;
   }
-  onRepetitionComplete(data: SensorFrame[]) {
-    this.owner.saveBaseline(data);
+  onRepetitionComplete(){
+
   }
   onSessionStopped() {
     this.owner.isRecording = false;
@@ -42,13 +42,6 @@ export struct BaselineView {
 
   aboutToDisappear() {
     this.logic?.stopSensors();
-  }
-
-  saveBaseline(data: SensorFrame[]) {
-    let context = getContext(this) as common.UIAbilityContext;
-    // Save to a specific filename that the Workout view will look for
-    this.saveResult = FileUtils.saveJson(context, 'baseline_rep.json', data);
-    this.statusMessage = "Baseline Saved!";
   }
 
   toggleRec() {

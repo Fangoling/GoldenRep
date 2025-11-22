@@ -7,8 +7,8 @@ import { GraphRendererService } from '../services/GraphRendererService';
 export interface IRecorderUI {
   onStatusChange(message: string, color: number | string | Color): void; // Accepting Color type or raw value
   onDataUpdate(duration: string, frameCount: number): void;
-  onRepetitionComplete(data: SensorFrame[]): void;
   onSessionStopped(): void;
+  onRepetitionComplete() : void;
 }
 
 export class RepetitionLogic {
@@ -49,6 +49,9 @@ export class RepetitionLogic {
   //private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);
   private context: CanvasRenderingContext2D = new CanvasRenderingContext2D();
   private graphRenderer: GraphRendererService = new GraphRendererService();
+
+  //
+  repCount: number = 0;
 
   constructor(uiDelegate: IRecorderUI) {
     this.ui = uiDelegate;
@@ -282,10 +285,11 @@ export class RepetitionLogic {
   private finishRepetition() {
     this.triggerHaptic(300); // Success vibration
 
-    // Send data to UI
-    this.ui.onRepetitionComplete(this.recordedData);
+    this.ui.onRepetitionComplete()
 
     if (this.isContinuousMode) {
+      this.repCount++
+
       // RESET for next rep
       this.ui.onStatusChange("Rep Complete! Resetting...", Color.Green);
 
@@ -294,5 +298,9 @@ export class RepetitionLogic {
       // STOP completely
       this.stopSession();
     }
+  }
+
+  saveRepetition(data: SensorFrame[]) {
+    // TODO
   }
 }
