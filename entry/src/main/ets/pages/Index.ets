@@ -4,7 +4,7 @@ import { TrainingView } from './TrainingView';
 
 @Entry
 @Component
-struct WatchApp {
+struct Index {
   // If null, show SelectionView. If set, show TrainingView.
   @State selectedExercise: Exercise | null = null;
 

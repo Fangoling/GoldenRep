@@ -44,12 +44,17 @@ export struct TrainingView {
       .height('100%')
 
       Circle()
-        .width('100%').height('100%')
-        .fillOpacity(0).strokeWidth(8).stroke('#1E293B')
+        .width('100%')
+        .height('100%')
+        .fillOpacity(0)
+        .strokeWidth(8)
+        .stroke('#1E293B')
 
       Text('×')
-        .fontSize(30).fontColor('#475569')
-        .position({ x: '50%', y: 10 }).translate({ x: '-50%' })
+        .fontSize(30)
+        .fontColor('#475569')
+        .position({ x: '50%', y: 10 })
+        .translate({ x: '-50%' })
         .onClick(this.onBack)
     }
     .width('100%').height('100%')

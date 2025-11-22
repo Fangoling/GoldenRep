@@ -59,7 +59,8 @@ export struct SelectionView {
           .height(40)
           .backgroundColor('#2563EB')
           .fontSize(16)
-          .position({ x: '50%', y: '85%' }).translate({ x: '-50%', y: '-100%' })
+          .position({ x: '50%', y: '85%' })
+          .translate({ x: '-50%', y: '-100%' })
           .onClick(() => {
             this.onExerciseSelect(EXERCISE_DB[this.currentIndex]);
           })
