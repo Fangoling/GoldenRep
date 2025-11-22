@@ -21,6 +21,7 @@ class BaselineDelegate implements IRecorderUI {
   }
 }
 
+@Entry
 @Component
 export struct BaselineView {
   @State isRecording: boolean = false;
