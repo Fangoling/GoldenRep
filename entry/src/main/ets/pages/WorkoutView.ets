@@ -1,6 +1,7 @@
 import { RepetitionLogic, IRecorderUI } from '../services/RepetitionLogic';
 import { SensorFrame } from '../SensorData';
 import router from '@ohos.router';
+import { FailureReason, RepResult } from '../services/SensorDataParser';
 
 class WorkoutDelegate implements IRecorderUI {
   private owner: WorkoutView;
@@ -19,6 +20,10 @@ class WorkoutDelegate implements IRecorderUI {
   onSessionStopped() {
     this.owner.isWorkoutActive = false;
   }
+  onRepetitionResult(repResult: RepResult): void {
+    this.owner.lastRepPerformance = repResult.isSuccessful;
+    this.owner.failureReason = repResult.failureReason;
+  }
 }
 
 @Entry
@@ -31,6 +36,10 @@ struct WorkoutView {
   @State showConfetti: boolean = false;
   @State confettiText: string = "🎉";
   @State backgroundBlur: number = 0; // Add blur state
+  @State lastRepPerformance: boolean | undefined = undefined;
+  @State failureReason: FailureReason | undefined = undefined;
+
+  onFinishSet: () => void = () => {};
 
   private logic: RepetitionLogic | null = null;
   private settings: RenderingContextSettings = new RenderingContextSettings(true);
@@ -113,6 +122,12 @@ struct WorkoutView {
           .fontColor(Color.Gray)
           .margin({ bottom: 20 })
 
+      Text(this.lastRepPerformance === undefined
+        ? undefined
+        : (this.lastRepPerformance ? "success" : "not success")
+      )
+
+      Text(this.failureReason ? this.failureReason.toString() : '')
         Text(this.statusMessage)
           .fontSize(14)
           .fontColor(Color.White)
