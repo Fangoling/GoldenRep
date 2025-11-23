@@ -4,7 +4,6 @@
     "pages/TrainingView",
     "pages/BaselineView",
     "pages/WorkoutView",
-    "pages/SetCompleteView",
-    "pages/TestAudioView"
+    "pages/SetCompleteView"
   ]
 }

@@ -27,6 +27,7 @@ export interface RepResult {
 export class SensorDataParser {
 
   private static instance: SensorDataParser;
+  private static readonly GLOBAL_INSTANCE_KEY = '__DRIVE_GUARD_SENSOR_DATA_PARSER__';
   protected setResult: RepResult[] =  []
   protected workoutSet: WorkoutSet;
   private constructor() {
@@ -56,7 +57,7 @@ export class SensorDataParser {
 
   // --- CONFIGURATION ---
   protected readonly TARGET_SIZE = 60;
-  protected readonly DTW_WINDOW = 10;
+  protected readonly DTW_WINDOW = 20;
 
   // Weights: Accel describes the "Path", Quat describes "Stability".
   // Usually path is more critical for counting.
@@ -147,6 +148,9 @@ export class SensorDataParser {
   }
 
   getAccuracy() {
+    if (this.workoutSet.reps === 0) {
+      return 0;
+    }
     return this.workoutSet.perfect/this.workoutSet.reps;
   }
 
@@ -154,8 +158,8 @@ export class SensorDataParser {
     return this.workoutSet.reps;
   }
 
-  requestFeedback() {
-    this.llmService.sendToChatGPT(this.workoutSet)
+  async requestFeedback(): Promise<string> {
+    return await this.llmService.sendToChatGPT(this.workoutSet);
   }
 
   private resetWorkoutSet(exerciseName: string) {

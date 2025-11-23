@@ -27,7 +27,7 @@ export class DTWUtils {
 
     if (n === 0 || m === 0) return Number.POSITIVE_INFINITY;
 
-    const w = (window === -1) ? Math.max(n, m) : window;
+    const w = (window === -1) ? Math.max(n, m) : Math.max(window, Math.abs(n - m));
 
     // 1. Init Matrix safely
     let dtw: number[][] = [];

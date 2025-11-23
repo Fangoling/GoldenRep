@@ -25,6 +25,9 @@ class BaselineDelegate implements IRecorderUI {
   }
   onSessionStopped() {
     this.owner.isRecording = false;
+    setTimeout(()=> {
+      router.pushUrl({url: 'pages/WorkoutView'});
+    }, 500)
   }
   onRepetitionResult(repResult: RepResult): void {
     this.owner.calibrationResult = repResult.isSuccessful.toString();
