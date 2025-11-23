@@ -4,6 +4,8 @@ import { SensorFrame } from '../SensorData';
 import { FileUtils } from '../services/FileUtils';
 import router from '@ohos.router';
 import { Exercise } from '../models/ExerciseData'; // Import Exercise for type safety
+import router from '@ohos.router';
+import { RepResult } from '../services/SensorDataParser';
 
 // Define the interface for the router parameters expected by this view
 interface BaselineRouterParams {
@@ -28,6 +30,9 @@ class BaselineDelegate implements IRecorderUI {
   onSessionStopped() {
     this.owner.isRecording = false;
   }
+  onRepetitionResult(repResult: RepResult): void {
+    this.owner.calibrationResult = repResult.isSuccessful.toString();
+  }
 }
 
 @Entry
@@ -38,6 +43,7 @@ struct BaselineView {
   @State statusColor: Color = Color.Gray;
   @State durationText: string = "0.00s";
   @State saveResult: string = "";
+  @State calibrationResult: string = "";
 
   private logic: RepetitionLogic | null = null;
   private settings: RenderingContextSettings = new RenderingContextSettings(true);
@@ -89,9 +95,9 @@ struct BaselineView {
       Text("CREATE BASELINE")
         .fontSize(14).fontWeight(FontWeight.Bold).margin(15)
 
-      Canvas(this.context)
-        .width('60%').height(80)
-        .onReady(() => this.logic?.setCanvasContext(this.context))
+        Canvas(this.context)
+          .width('60%').height(80)
+          .onReady(() => this.logic?.setCanvasContext(this.context))
 
       Text(this.statusMessage).fontSize(14).fontColor(this.statusColor).padding({bottom : 3})
       Text(this.durationText).fontSize(14).fontWeight(FontWeight.Bold)
@@ -102,8 +108,6 @@ struct BaselineView {
         .width('30%').height(25)
         .onClick(() => this.toggleRec())
 
-      Text(this.saveResult).fontSize(12).fontColor(Color.Gray)
     }
-    .width('100%').height('100%').justifyContent(FlexAlign.Center)
   }
 }
